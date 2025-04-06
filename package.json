@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.779.0",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
+    "busboy": "^1.6.0",
+    "cors": "^2.8.5",
+    "csurf": "^1.11.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "express-session": "^1.18.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "4.1",
+    "mongoose": "^8.13.1",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.2",
+    "netlify-lambda": "^2.0.16",
+    "nodemailer": "^6.10.0",
+    "uuid": "^11.1.0",
+    "validator": "^13.15.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "login_v4",
+  "version": "1.0.0",
+  "main": "server.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

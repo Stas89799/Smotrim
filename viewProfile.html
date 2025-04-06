@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Просмотр визитки</title>
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <style>
+        .profile-view {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .profile-field {
+            margin-bottom: 15px;
+        }
+        .field-label {
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="limiter">
+        <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+            <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+                <div class="profile-view" id="profileView">
+                    <!-- Данные будут загружены через JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getFieldName(key) {
+            const names = {
+                'firstName': 'Имя',
+                'lastName': 'Фамилия',
+                'middleName': 'Отчество',
+                'email': 'Email',
+                'phone': 'Телефон',
+                'company': 'Компания',
+                'address': 'Адрес',
+                'instagram': 'Instagram',
+                'facebook': 'Facebook'
+            };
+            return names[key] || key;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const token = urlParams.get('token');
+                const savedToken = localStorage.getItem('viewToken');
+                
+                let profileData = {};
+                try {
+                    profileData = JSON.parse(localStorage.getItem('profileData') || '{}');
+                } catch (e) {
+                    console.error('Ошибка чтения данных', e);
+                }
+
+                if (!token || token !== savedToken || !profileData || Object.keys(profileData).length === 0) {
+                    showError();
+                    return;
+                }
+
+                const container = document.getElementById('profileView');
+                let html = '<h1 class="login100-form-title p-b-49">Моя визитка</h1>';
+                
+                for (const [key, value] of Object.entries(profileData)) {
+                    if (value && key !== 'avatar') {
+                        html += `
+                            <div class="profile-field">
+                                <div class="field-label">${getFieldName(key)}:</div>
+                                <div>${value}</div>
+                            </div>`;
+                    }
+                }
+                
+                container.innerHTML = html;
+
+            } catch (error) {
+                console.error('Ошибка:', error);
+                showError();
+            }
+        });
+
+        function showError() {
+            document.getElementById('profileView').innerHTML = `
+                <div style="text-align: center;">
+                    <h2 style="color: red;">Визитка не найдена или доступ запрещён</h2>
+                    <p><a href="index.html" class="txt2">Вернуться на главную</a></p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
