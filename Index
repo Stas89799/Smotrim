@@ -89,7 +89,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Инициализация Netlify Identity
             netlifyIdentity.init({
-                APIUrl: 'https://cerulean-stardust-4eebb5.netlify.app/'
+                APIUrl: 'https://cerulean-stardust-4eebb5.netlify.app/.netlify/identity'
             });
 
             // Проверка авторизации
